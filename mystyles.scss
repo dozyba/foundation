@@ -1,0 +1,420 @@
+@import './_settings';
+@import 'foundation';
+
+@include foundation-everything($prototype: true);
+
+$topbar-responsive-bg: #2c3840;
+$topbar-responsive-animation-type: fade-in; // or use slide-down or none
+
+.topbar-responsive {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #04AA6D;
+  padding: 1rem 1.5rem;
+
+  .topbar-responsive-logo {
+    color: $white;
+    vertical-align: middle;
+  }
+
+  .menu {
+    background-color:#04AA6D;
+
+    li:last-of-type {
+      margin-right: 0;
+    }
+
+    a {
+      color: $white;
+      transition: color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @media screen and (max-width: 39.9375em) {
+        padding: 0.875rem 0;
+      }
+    }
+
+    .topbar-responsive-button {
+      color: $white;
+      border-color: $white;
+      border-radius: 5000px;
+      transition: color 0.15s ease-in, border-color 0.15s ease-in;
+
+      &:hover {
+        color: lighten($topbar-responsive-bg, 60%);
+        border-color: lighten($topbar-responsive-bg, 60%);
+      }
+
+      @media screen and (max-width: 39.9375em) {
+        width: 100%;
+        margin: 0.875rem 0;
+      }
+    }
+  }
+
+   @media screen and (max-width: 39.9375em) {
+     padding: 0.75rem;
+
+    .top-bar-title {
+      position: relative;
+      width: 100%;
+
+      span {
+        position: absolute;
+        right: 0;
+        border: 1px solid $white;
+        border-radius: 5px;
+        padding: 0.25rem 0.45rem;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .menu-icon {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity:0;
+  } to {
+    opacity:1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@include breakpoint(small only) {
+  .topbar-responsive-links {
+    animation-fill-mode: both;
+    animation-duration: 0.5s;
+    width: 100%;
+
+    @if $topbar-responsive-animation-type == slide-down {
+      animation: slideDown 1s ease-in;
+    } @else if $topbar-responsive-animation-type == fade-in {
+      animation: fadeIn 1s ease-in;
+    } @else {
+      animation: none;
+    }
+  }
+}
+
+$bar-graph-height: 425px;
+
+.bar-graph {
+    background-color: rgb(254, 152, 254);
+    position: absolute;
+    top: 276px;
+    left: 910px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 13px;
+  padding: 0;
+  width: 40%;
+  display: flex;
+  align-items: flex-end;
+  height: $bar-graph-height;
+  margin: 0;
+
+  li {
+    display: block;
+    padding: rem-calc(25) 0;
+    position: relative;
+    text-align: center;
+    vertical-align: bottom;
+    border-radius: 4px 4px 0 0;
+    max-width: 20%;
+    height: 100%;
+    margin: 0 1.8% 0 0;
+    flex: 1 1 15%;
+  }
+
+  .bar-graph-axis {
+    flex: 1 1 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .bar-graph-label {
+    margin: 0;
+    background-color: none;
+    color: $dark-gray;
+    position: relative;
+
+    @include breakpoint(medium) {
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px dashed $dark-gray;
+        top: 0;
+        left: 0;
+        height: 50%;
+        width: 20%;
+
+        @include breakpoint(large) {
+          width: 30%;
+        }
+      }
+
+      &:after {
+        left: auto;
+        right: 0;
+      }
+    }
+  }
+
+  .percent {
+    letter-spacing: -3px;
+    opacity: 0.4;
+    width: 100%;
+    font-size: rem-calc(30);
+    position: absolute;
+
+    @include breakpoint(medium) {
+      font-size: rem-calc(62);
+    }
+
+    span {
+      font-size: rem-calc(30);
+    }
+  }
+
+  .description {
+    font-weight: 800;
+    opacity: 0.5;
+    text-transform: uppercase;
+    width: 100%;
+    font-size: 14px;
+    bottom: 20px;
+    position: absolute;
+    font-size: rem-calc(16);
+    overflow: hidden;
+  }
+
+ .bar {
+    @each $name, $color in $foundation-palette {
+      &.#{$name} {
+        border: 1px solid $color;
+        background: linear-gradient(lighten($color, 10%), $color 70%);
+      }
+    }
+  }
+}
+
+.pieContainer {
+    height: 100px;
+    width: 100px;
+    position: relative;
+    margin-top: 10px;
+  }
+  
+  .pieBackground{
+    background-color: #333;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    
+    -webkit-box-shadow:  0px 0px 5px 1px rgba(0, 0, 0, .75);      
+    box-shadow:  0px 0px 5px 1px rgba(0, 0, 0, .75);
+  }
+  
+  .stat-circle-cover {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    
+    background-color: #333;
+    height: 80%;
+    width: 80%;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    
+    -moz-box-shadow:inset 0px 0px 5px #666;
+    -webkit-box-shadow:inset 0px 0px 5px #666;
+    box-shadow:inset 0px 0px 1px #666;
+  }
+  
+  .stat-circle-cover span.stat-number {
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    line-height: 80px;
+    color: #f78e1e;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 24px;
+    font-family: Helvetica-Neue, Helvetica, arial, verdana, sans-serif;
+    font-weight: bold;
+  }
+  
+  .pie {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    clip: rect(0px, 50px, 100px, 0px);
+  }
+  
+  .hold {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    clip: rect(0px, 100px, 100px, 50px);
+  }
+  
+  #pieSlice25 .pie {
+    background-color: dodgerblue;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    
+  }
+  
+  #pieSlice50 .pie {
+    background-color: grey;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    
+  }
+  
+  #pieSlice75_1 .pie {
+    background-color: lightgreen;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  
+  #pieSlice75_2 {
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg);
+  }
+  
+  #pieSlice75_2 .pie {
+    background-color: lightgreen;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  
+  #pieSlice99_1 .pie {
+    background-color: orange;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  
+  #pieSlice99_2 {
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg);
+  }
+  
+  #pieSlice99_2 {
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    transform:rotate(180deg);
+  }
+  
+  #pieSlice99_2 .pie {
+    background-color: orange;
+    -webkit-transform: rotate(178deg);
+    -moz-transform: rotate(178deg);
+    -o-transform: rotate(178deg);
+    transform: rotate(178deg);
+    background-image: -webkit-linear-gradient(top, orange);
+  }
+  
+  .sidebar {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: rgb(250, 33, 250);
+    height: 629px;
+    overflow: auto;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  /* Active/current link */
+  .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+  img{
+    border-radius: 10px;
+  }
+  body{
+    background-color: lightpink;
+  }
